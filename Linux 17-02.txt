@@ -1,0 +1,39 @@
+Linux command--------
+1:- toPrint the lines having greater than 30 char in File1.txt-------------------------------------
+
+[cloudera@quickstart rajlinux]$ ls
+demo2.txt  file2.txt  file2.txt~  file3.txt  file4.txt
+[cloudera@quickstart rajlinux]$ gedit assign4.txt
+[cloudera@quickstart rajlinux]$ cat assign4.txt
+Positive thinking is an attitude or mindset 
+charcaterized by optimism and happines. 
+A positive person hopes for the best
+ and anticipates success in his life. 
+Although many may scoff at the idea
+ of always being positive.
+[cloudera@quickstart rajlinux]$ grep -E'.{31,}' file1.txt
+grep: invalid option -- '.'
+Usage: grep [OPTION]... PATTERN [FILE]...
+Try 'grep --help' for more information.
+[cloudera@quickstart rajlinux]$ grep -E '.{31,}' file1.txt
+grep: file1.txt: No such file or directory
+[cloudera@quickstart rajlinux]$ grep -E '.{31,}' assign4.txt
+Positive thinking is an attitude or mindset 
+charcaterized by optimism and happines. 
+A positive person hopes for the best
+ and anticipates success in his life. 
+Although many may scoff at the idea
+
+2:- Remove the lines having greater than 30 char and store it in File2.txt-----------------------------
+
+[cloudera@quickstart rajlinux]$ sed -r '/^.{31}/d'  assign4.txt >file2.txt
+[cloudera@quickstart rajlinux]$ cat file2.txt
+ of always being positive.
+
+3:- Check and Remove the Dot (.) or EndPeriod if it is in the end of the line and store it in File3.txt------------------
+
+[cloudera@quickstart rajlinux]$ sed 's/\.$//' file2.txt > file3.txt
+[cloudera@quickstart rajlinux]$ catv file3.txt
+bash: catv: command not found
+[cloudera@quickstart rajlinux]$ cat file3.txt
+ of always being positive
