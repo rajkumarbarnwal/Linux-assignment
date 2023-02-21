@@ -1,0 +1,61 @@
+Linux command to Swap the column (3<=> 2) of a file
+After swapping if it has duplicated rows,
+ then remove itPlace the counts of line before and after conversion in the footer of output file
+Save it in a new file Demo2.txt
+The output file should contain (let assume the column swapped)Demo2.txt----------------------------1    
+    2          3xxxx  97497   delivery....Total no lines 
+before: 202
+Total no lines after: 196
+
+solution----------------------------------------------------------------------------------------------------------
+[cloudera@quickstart Desktop]$ ls
+Eclipse.desktop     Express.desktop   Parcels.desktop
+Enterprise.desktop  Kerberos.desktop  raj.txt
+[cloudera@quickstart Desktop]$ mkdir rajlinux
+[cloudera@quickstart Desktop]$ cd rajlinux
+[cloudera@quickstart rajlinux]$ gedit file2.txt
+[cloudera@quickstart rajlinux]$ cat file2.txt
+2 A Raj cricket
+5 B abhinay ludo
+8 A asif football
+1 A ananth badminton
+6 S shubham kabbaddi
+
+[cloudera@quickstart rajlinux]$ awk '{temp=$2;$2=$3;$3=temp; print}' file2.txt>file3.txt
+[cloudera@quickstart rajlinux]$ cat file3.txt
+2 Raj A cricket
+5 abhinay B ludo
+8 asif A football
+1 ananth A badminton
+6 shubham S kabbaddi
+  
+[cloudera@quickstart rajlinux]$ sort -u file3.txt>file4.txt
+[cloudera@quickstart rajlinux]$ cat file4.txt
+  
+1 ananth A badminton
+2 Raj A cricket
+5 abhinay B ludo
+6 shubham S kabbaddi
+8 asif A football
+
+[cloudera@quickstart rajlinux]$ echo "Before.$(wc -l <file2.txt)">>file4.txt
+[cloudera@quickstart rajlinux]$ echo "After.$(wc -l <file3.txt)">>file4.txt
+[cloudera@quickstart rajlinux]$ cat file4.txt
+  
+1 ananth A badminton
+2 Raj A cricket
+5 abhinay B ludo
+6 shubham S kabbaddi
+8 asif A football
+Before.6
+After.6
+[cloudera@quickstart rajlinux]$ cp file4.txt demo2.txt
+[cloudera@quickstart rajlinux]$ cat demo2.txt
+  
+1 ananth A badminton
+2 Raj A cricket
+5 abhinay B ludo
+6 shubham S kabbaddi
+8 asif A football
+After.6
+Before.6
